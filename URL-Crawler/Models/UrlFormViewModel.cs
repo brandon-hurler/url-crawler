@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace URL_Crawler.Models
 {
@@ -8,6 +9,7 @@ namespace URL_Crawler.Models
         // Also could use #nullable disable on view model class if containing multiple properties.
         [Url]
         [Required]
+        [DisplayName("URL")]
         public string Url { get; set; } = null!;
     }
 }
