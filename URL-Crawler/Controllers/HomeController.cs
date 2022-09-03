@@ -1,15 +1,18 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using URL_Crawler.Models;
+using URL_Crawler.Services;
 
 namespace URL_Crawler.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly IViewRenderService _viewRenderService;
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(IViewRenderService viewRenderService, ILogger<HomeController> logger)
         {
+            _viewRenderService = viewRenderService;
             _logger = logger;
         }
 
@@ -21,12 +24,25 @@ namespace URL_Crawler.Controllers
         }
 
         [HttpPost]
-        public IActionResult GetUrlContent(UrlFormViewModel model)
+        public async Task<IActionResult> GetUrlContentAsync(UrlFormViewModel model)
         {
-            if (!ModelState.IsValid)
-                return View("_UrlForm", model);
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    // Render partial server side to get ModelState validation on partial, allowing reuse.
+                    var renderedPartial = await _viewRenderService.RenderView("Views/Home/_UrlForm.cshtml", model, ControllerContext, true);
+                    return Json(renderedPartial);
+                }
 
-            return View(model);
+                return View(model);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e.Message);
+
+                throw;
+            }
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
