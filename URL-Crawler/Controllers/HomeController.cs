@@ -20,9 +20,13 @@ namespace URL_Crawler.Controllers
             return View(model);
         }
 
-        public IActionResult Privacy()
+        [HttpPost]
+        public IActionResult GetUrlContent(UrlFormViewModel model)
         {
-            return View();
+            if (!ModelState.IsValid)
+                return View("_UrlForm", model);
+
+            return View(model);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

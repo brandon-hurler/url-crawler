@@ -4,12 +4,16 @@
     ViewData["Title"] = "URL Crawler";
 }
 
-@using (Html.BeginForm("Submit", "Home", FormMethod.Post, new { @class = "mt-5" }))
+@* Kept in index to prevent needing to rebind AJAX if reloaded for error. *@
+@using (Html.BeginForm("GetUrlContent", "Home", FormMethod.Post, new { @class = "js-ajax-form mt-5" }))
 {
-    <div class="mb-3">
-        @Html.LabelFor(f => f.Url, "Enter a URL", new { @class = "form-label" })
-        @Html.TextBoxFor(f => f.Url, "Enter a URL", new { @class = "form-control", placeholder = "E.g. https://example.com", aria_label="url input", type="url" })
-    </div>
+    <partial name="_UrlForm" />
+}
 
-    <button type="submit" class="btn btn-primary mt-2">Submit</button>
+<div id="content-area">
+    @* Container element for AJAX return SPA *@
+</div>
+
+@section Scripts {
+    <script type="text/javascript" src="~/js/url-form.js"></script>
 }

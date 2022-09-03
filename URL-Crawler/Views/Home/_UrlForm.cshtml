@@ -1,0 +1,9 @@
+﻿@model UrlFormViewModel
+
+<div class="mb-3">
+    @Html.LabelFor(f => f.Url, "Enter a URL", new { @class = "form-label" })
+    @Html.TextBoxFor(f => f.Url, "Enter a URL", new { @class = "form-control", placeholder = "E.g. https://example.com", aria_label="url input", type="url" })
+    @Html.ValidationMessageFor(f => f.Url)
+</div>
+
+<button type="submit" class="btn btn-primary mt-2">Submit</button>
