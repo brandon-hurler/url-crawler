@@ -3,26 +3,25 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - URL_Crawler</title>
+    <title>@ViewData["Title"] - URL Crawler</title>
+    <link rel="preload" as="font" crossorigin="crossorigin" href="https://fonts.google.com/?selection.family=Open+Sans" />
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/URL_Crawler.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/sass/site.css" asp-append-version="true" />
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm border-bottom box-shadow mb-3">
             <div class="container-fluid">
                 <a class="navbar-brand">URL Crawler</a>
             </div>
         </nav>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
+    <main role="main" class="pb-3">
+        <div class="container">
             @RenderBody()
-        </main>
-    </div>
-
-    <footer class="border-top footer text-muted">
+        </div>
+    </main>
+    <footer class="border-top footer p-3">
         <div class="container">
             &copy; 2022 - Brandon Hurler
         </div>

@@ -1,0 +1,19 @@
+﻿html {
+    position: relative;
+    min-height: 100%;
+}
+
+header,
+footer {
+    flex-shrink: 0;
+}
+
+main {
+    flex-grow: 1;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}

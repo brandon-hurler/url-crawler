@@ -1,0 +1,15 @@
+﻿@import "_variables.scss";
+
+footer, header > nav {
+    background-color: $primary-background-color;
+    color: $primary-background-color-text;
+
+    a {
+        color: inherit;
+        cursor: pointer;
+
+        &:hover {
+            color: inherit;
+        }
+    }
+}
