@@ -1,8 +1,15 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model UrlFormViewModel
+
+@{
+    ViewData["Title"] = "URL Crawler";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+@using (Html.BeginForm("Submit", "Home", FormMethod.Post, new { @class = "mt-5" }))
+{
+    <div class="mb-3">
+        @Html.LabelFor(f => f.Url, "Enter a URL", new { @class = "form-label" })
+        @Html.TextBoxFor(f => f.Url, "Enter a URL", new { @class = "form-control", placeholder = "E.g. https://example.com", aria_label="url input", type="url" })
+    </div>
+
+    <button type="submit" class="btn btn-primary mt-2">Submit</button>
+}

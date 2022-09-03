@@ -15,7 +15,9 @@ namespace URL_Crawler.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            var model = new UrlFormViewModel();
+
+            return View(model);
         }
 
         public IActionResult Privacy()
