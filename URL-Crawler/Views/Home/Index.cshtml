@@ -5,12 +5,12 @@
 }
 
 @* Kept in index to prevent needing to rebind AJAX if reloaded for error. *@
-@using (Html.BeginForm("GetUrlContent", "Home", FormMethod.Post, new { @class = "js-ajax-form mt-5" }))
+@using (Html.BeginForm("GetUrlContent", "Home", FormMethod.Post, new { @class = "js-ajax-form mt-lg-5 mt-md-3 mt-sm-2" }))
 {
     <partial name="_UrlForm" />
 }
 
-<div id="content-area">
+<div id="content-area" class="mb-5">
     @* Container element for AJAX return SPA *@
 </div>
 

@@ -27,9 +27,11 @@
 
 .carousel {
     max-height: $carousel-height;
+    min-height: $carousel-min-height;
 
     & img {
         max-height: $carousel-height;
+        min-height: $carousel-min-height;
         object-fit: cover;
     }
 }
