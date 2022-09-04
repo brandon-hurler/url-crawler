@@ -4,8 +4,8 @@
 @import "_variables.scss";
 @import "_typography.scss";
 
-/* Shared HTML components */
-@import "_elements.scss";
+/* Bootstrap Overrides */
+@import "_theming.scss";
 
 /* Primary imports */
 @import "_main.scss";

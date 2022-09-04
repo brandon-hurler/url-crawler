@@ -1,20 +1,18 @@
 ﻿$(document).ready(function () {
-    var formElement = $('.js-ajax-form');
+    var form = $('.js-ajax-form');
     var contentArea = $("#content-area");
 
     // Use event delegation to correctly target submit if partial has been reloaded.
-    formElement.on('click', ':submit', function (e) {
+    form.on('click', ':submit', function (e) {
         // Prevent standard post-back for SPA AJAX submit
         e.preventDefault();
 
-        var form = $(e.currentTarget).closest('form');
-
-        post(form, formElement, contentArea);
+        post(form, contentArea, initializeCarousel);
     });
 });
 
-var post = function (form, formContainer, contentArea) {
-    var validationArea = formContainer.find("#validation-area");
+var post = function (form, contentArea, initialize) {
+    var validationArea = form.find("#validation-area");
 
     $.ajax({
         type: 'POST',
@@ -24,18 +22,26 @@ var post = function (form, formContainer, contentArea) {
         success: function (data) {
             if (!data.success) {
                 // Update form with data validation errors
-                formContainer.html(data.payload);
+                form.html(data.payload);
             }
             else {
+                // Clear errors on success if any
                 validationArea.html("");
 
                 // Display content
                 contentArea.html(data.payload);
+
+                // Can init any passed function into form post to bind events to newly generated partial content
+                initialize();
             }
         },
         error: function (data) {
-            // Show stacktrace
+            // Show stacktrace, can be replaced by user-friendly errors
             contentArea.html(data);
         }
     });
+}
+
+var initializeCarousel = function () {
+    $("#image-carousel").carousel();
 }

@@ -24,3 +24,12 @@
         margin-bottom: 0;
     }
 }
+
+.carousel {
+    max-height: $carousel-height;
+
+    & img {
+        max-height: $carousel-height;
+        object-fit: cover;
+    }
+}

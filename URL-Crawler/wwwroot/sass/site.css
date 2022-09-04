@@ -4,7 +4,7 @@ html {
   font-size: calc(16px + 0.390625vw);
 }
 
-/* Shared HTML components */
+/* Bootstrap Overrides */
 .btn-primary {
   background-color: #008080;
   border-color: #008080;
@@ -25,6 +25,14 @@ html {
 }
 .validation-summary-errors > ul {
   margin-bottom: 0;
+}
+
+.carousel {
+  max-height: 350px;
+}
+.carousel img {
+  max-height: 350px;
+  object-fit: cover;
 }
 
 /* Primary imports */
