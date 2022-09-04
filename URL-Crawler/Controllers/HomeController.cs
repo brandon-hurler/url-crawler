@@ -1,6 +1,7 @@
 ﻿using HtmlAgilityPack;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using System.Net;
 using URL_Crawler.Models;
 using URL_Crawler.Services;
 
@@ -42,6 +43,13 @@ namespace URL_Crawler.Controllers
                 var contentModel = new ContentModel(htmlDocument, model.TopWordCount ?? 10);
                 var contentPartial = await _viewRenderService.RenderView("Views/Home/_Content.cshtml", contentModel, ControllerContext, true);
 
+                return Json(new { success = true, payload = contentPartial });
+            }
+            catch (WebException)
+            {
+                var contentPartial = await _viewRenderService.RenderView("Views/Home/_UrlError.cshtml", string.Empty, ControllerContext, true);
+
+                // Success true for caught error for invalid URL.
                 return Json(new { success = true, payload = contentPartial });
             }
             catch (Exception e)
