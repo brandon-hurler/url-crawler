@@ -15,6 +15,10 @@ html {
   border-color: #00B3B3;
 }
 
+.validation-summary-errors > ul {
+  margin-bottom: 0;
+}
+
 /* Primary imports */
 html {
   position: relative;

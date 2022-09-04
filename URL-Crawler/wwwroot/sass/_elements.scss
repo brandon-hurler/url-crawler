@@ -10,3 +10,7 @@
         border-color: $secondary-background-color;
     }
 }
+
+.validation-summary-errors > ul {
+    margin-bottom: 0;
+}

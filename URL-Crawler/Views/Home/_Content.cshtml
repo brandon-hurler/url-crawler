@@ -1,0 +1,23 @@
+﻿@model ContentModel
+
+<div class="mt-5">
+    <h2>Total Words: @Model.TotalWordCount</h2>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Word</th>
+            <th scope="col">Count</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var word in Model.TopWords)
+        {
+            <tr>
+                <td>@word.Key</td>
+                <td>@word.Count()</td>
+            </tr>
+        }
+    </tbody>
+</table>

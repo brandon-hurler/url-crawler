@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using HtmlAgilityPack;
+using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using URL_Crawler.Models;
 using URL_Crawler.Services;
@@ -18,24 +19,30 @@ namespace URL_Crawler.Controllers
 
         public IActionResult Index()
         {
-            var model = new UrlFormViewModel();
+            var model = new UrlFormModel();
 
             return View(model);
         }
 
         [HttpPost]
-        public async Task<IActionResult> GetUrlContentAsync(UrlFormViewModel model)
+        public async Task<IActionResult> GetUrlContentAsync(UrlFormModel model)
         {
             try
             {
                 if (!ModelState.IsValid)
                 {
                     // Render partial server side to get ModelState validation on partial, allowing reuse.
-                    var renderedPartial = await _viewRenderService.RenderView("Views/Home/_UrlForm.cshtml", model, ControllerContext, true);
-                    return Json(renderedPartial);
+                    var urlFormPartial = await _viewRenderService.RenderView("Views/Home/_UrlForm.cshtml", model, ControllerContext, true);
+                    return Json(new { success = false, payload = urlFormPartial });
                 }
 
-                return View(model);
+                var webClient = new HtmlWeb();
+                var htmlDocument = webClient.Load(model.Url);
+
+                var contentModel = new ContentModel(htmlDocument, model.TopWordCount ?? 10);
+                var contentPartial = await _viewRenderService.RenderView("Views/Home/_Content.cshtml", contentModel, ControllerContext, true);
+
+                return Json(new { success = true, payload = contentPartial });
             }
             catch (Exception e)
             {

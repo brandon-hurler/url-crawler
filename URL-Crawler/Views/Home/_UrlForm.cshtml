@@ -1,9 +1,30 @@
-﻿@model UrlFormViewModel
+﻿@model UrlFormModel
 
-<div class="mb-3">
-    @Html.LabelFor(f => f.Url, "Enter a URL", new { @class = "form-label" })
-    @Html.TextBoxFor(f => f.Url, "Enter a URL", new { @class = "form-control", placeholder = "E.g. https://example.com", aria_label="url input", type="url" })
-    @Html.ValidationMessageFor(f => f.Url)
+
+<div class="row align-items-center">
+    <div class="col-9">
+        <div class="mb-3">
+            @Html.LabelFor(f => f.Url, "Enter a URL", new { @class = "form-label" })
+            @Html.TextBoxFor(f => f.Url, "Enter a URL", new { @class = "form-control", placeholder = "E.g. https://example.com", aria_label="url input", type="url" })
+        </div>
+    </div>
+    <div class="col-3">
+        <div class="mb-3">
+            @Html.LabelFor(f => f.TopWordCount, "Most Frequent Words", new { @class = "form-label" })
+            @Html.TextBoxFor(f => f.TopWordCount, new { @class = "form-control", aria_label="number input", type="number" })
+        </div>
+    </div>
 </div>
 
 <button type="submit" class="btn btn-primary mt-2">Submit</button>
+
+@if (!ViewData.ModelState.IsValid)
+{
+    <div id="validation-area">
+        <div class="row align-items-center mt-3">
+            <div class="col-12 mb-3">
+                @Html.ValidationSummary(false, null, htmlAttributes: new { @class="alert alert-danger" })
+            </div>
+        </div>
+    </div>
+}
