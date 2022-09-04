@@ -17,6 +17,10 @@
     }
 }
 
-.validation-summary-errors > ul {
-    margin-bottom: 0;
+.validation-summary-errors {
+    word-wrap: break-word;
+
+    > ul {
+        margin-bottom: 0;
+    }
 }

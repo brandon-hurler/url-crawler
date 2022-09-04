@@ -20,6 +20,9 @@ html {
   box-shadow: 0 0 0 0.25rem rgba(55, 200, 200, 0.5);
 }
 
+.validation-summary-errors {
+  word-wrap: break-word;
+}
 .validation-summary-errors > ul {
   margin-bottom: 0;
 }
