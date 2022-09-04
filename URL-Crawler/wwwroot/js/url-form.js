@@ -1,7 +1,6 @@
 ﻿$(document).ready(function () {
     var formElement = $('.js-ajax-form');
     var contentArea = $("#content-area");
-    var validationArea = $("#validation-area");
 
     // Use event delegation to correctly target submit if partial has been reloaded.
     formElement.on('click', ':submit', function (e) {
@@ -10,11 +9,13 @@
 
         var form = $(e.currentTarget).closest('form');
 
-        post(form, formElement, contentArea, validationArea);
+        post(form, formElement, contentArea);
     });
 });
 
-var post = function (form, formContainer, contentArea, validationArea) {
+var post = function (form, formContainer, contentArea) {
+    var validationArea = formContainer.find("#validation-area");
+
     $.ajax({
         type: 'POST',
         url: form.attr('action'),
@@ -26,7 +27,6 @@ var post = function (form, formContainer, contentArea, validationArea) {
                 formContainer.html(data.payload);
             }
             else {
-                // Reset validation on success
                 validationArea.html("");
 
                 // Display content
