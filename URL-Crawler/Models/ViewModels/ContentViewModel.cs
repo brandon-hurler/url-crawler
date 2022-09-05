@@ -5,7 +5,9 @@ namespace URL_Crawler.Models.ViewModels
 {
     public class ContentViewModel
     {
-        public ContentViewModel(IDocument document, int wordCount)
+        public const int BaseCount = 10;
+
+        public ContentViewModel(IDocument document, int? wordCount = BaseCount)
         {
             var allText = document.GetText();
 
@@ -20,8 +22,10 @@ namespace URL_Crawler.Models.ViewModels
 
         public List<WebImage> Images { get; set; } = new List<WebImage>();
 
-        private static List<IGrouping<string, string>> GetTopWords(List<string> text, int count = 10)
+        private static List<IGrouping<string, string>> GetTopWords(List<string> text, int? wordCount = BaseCount)
         {
+            // Prevents needing to cast below, adding additional check with fallback default.
+            var count = wordCount ?? BaseCount;
             var sortedWords = text.GroupBy(f => f).OrderByDescending(f => f.Count()).ToList();
 
             return count < sortedWords.Count ? sortedWords.Take(count).ToList() : sortedWords;

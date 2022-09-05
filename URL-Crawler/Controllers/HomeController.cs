@@ -43,7 +43,7 @@ namespace URL_Crawler.Controllers
                 // Can swap for a different reader type, e.g. file reader by changing injection above.
                 var document = _documentReader.Read(model.Url);
 
-                var contentModel = new ContentViewModel(document, model.TopWordCount ?? 10);
+                var contentModel = new ContentViewModel(document, model.TopWordCount);
                 var contentPartial = await _viewRenderService.RenderView("Views/Home/_Content.cshtml", contentModel, ControllerContext, true);
 
                 return Json(new { success = true, payload = contentPartial });
