@@ -14,7 +14,7 @@ namespace URL_Crawler.Models
 
         // Making nullable int for Required Data Annotation to display correct error message.
         [Required(ErrorMessage = "Enter a number.")]
-        [Range(1, int.MaxValue, ErrorMessage = "Please enter a valid, positive, non-zero integer.")]
+        [Range(1, int.MaxValue, ErrorMessage = "Please enter a positive, non-zero integer.")]
         public int? TopWordCount { get; set; } = 10;
     }
 }
