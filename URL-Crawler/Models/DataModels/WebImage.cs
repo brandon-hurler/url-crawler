@@ -1,8 +1,8 @@
-﻿namespace URL_Crawler.Models
+﻿namespace URL_Crawler.Models.DataModels
 {
-    public class Image
+    public class WebImage
     {
-        public Image(string source, string altText = "")
+        public WebImage(string source, string altText = "")
         {
             Source = source;
             AltText = altText; // Can leave empty for decorative images only

@@ -1,32 +1,35 @@
-﻿using HtmlAgilityPack;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using System.Net;
-using URL_Crawler.Models;
+using URL_Crawler.Models.Adapters;
+using URL_Crawler.Models.Interfaces;
+using URL_Crawler.Models.ViewModels;
 using URL_Crawler.Services;
 
 namespace URL_Crawler.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IViewRenderService _viewRenderService;
         private readonly ILogger<HomeController> _logger;
+        private readonly IViewRenderService _viewRenderService;
+        private readonly IDocumentReader<HtmlWebDocumentReader> _documentReader;
 
-        public HomeController(IViewRenderService viewRenderService, ILogger<HomeController> logger)
+        public HomeController(IDocumentReader<HtmlWebDocumentReader> documentReader, IViewRenderService viewRenderService, ILogger<HomeController> logger)
         {
-            _viewRenderService = viewRenderService;
             _logger = logger;
+            _documentReader = documentReader;
+            _viewRenderService = viewRenderService;
         }
 
         public IActionResult Index()
         {
-            var model = new UrlFormModel();
+            var model = new UrlFormViewModel();
 
             return View(model);
         }
 
         [HttpPost]
-        public async Task<IActionResult> GetUrlContentAsync(UrlFormModel model)
+        public async Task<IActionResult> GetUrlContentAsync(UrlFormViewModel model)
         {
             try
             {
@@ -37,10 +40,10 @@ namespace URL_Crawler.Controllers
                     return Json(new { success = false, payload = urlFormPartial });
                 }
 
-                var webClient = new HtmlWeb();
-                var htmlDocument = webClient.Load(model.Url);
+                // Can swap for a different reader type, e.g. file reader by changing injection above.
+                var document = _documentReader.Read(model.Url);
 
-                var contentModel = new ContentModel(htmlDocument, model.TopWordCount ?? 10);
+                var contentModel = new ContentViewModel(document, model.TopWordCount ?? 10);
                 var contentPartial = await _viewRenderService.RenderView("Views/Home/_Content.cshtml", contentModel, ControllerContext, true);
 
                 return Json(new { success = true, payload = contentPartial });

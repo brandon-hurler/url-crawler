@@ -1,4 +1,4 @@
-namespace URL_Crawler.Models
+namespace URL_Crawler.Models.ViewModels
 {
     public class ErrorViewModel
     {
