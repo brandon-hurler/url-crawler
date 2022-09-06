@@ -9,7 +9,7 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm box-shadow">
             <div class="container-fluid">
                 <a class="navbar-brand">URL Crawler</a>
             </div>
@@ -20,7 +20,7 @@
             @RenderBody()
         </div>
     </main>
-    <footer class="border-top footer p-3">
+    <footer class="footer p-3">
         <div class="container d-flex justify-content-between">
             <div>&copy; 2022 - Brandon Hurler</div>
             <div class="d-flex align-items-center">
@@ -35,6 +35,7 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
     <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script type="text/javascript" src="~/js/loading-button.es5.min.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

@@ -16,7 +16,11 @@
     </div>
 </div>
 
-<button type="submit" class="btn btn-primary mt-2">Submit</button>
+<button type="submit" class="btn btn-primary js-btn-submit mt-2">Submit</button>
+<button type="button" class="btn btn-primary js-btn-submit mt-2" disabled style="display: none;">
+    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+    Loading...
+</button>
 
 @if (!ViewData.ModelState.IsValid)
 {

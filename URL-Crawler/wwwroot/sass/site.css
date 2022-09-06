@@ -10,14 +10,17 @@ html {
   border-color: #008080;
   color: #FFFFFF;
 }
-.btn-primary:hover {
+.btn-primary:hover, .btn-primary:focus, .btn-primary:disabled {
   background-color: #00B3B3;
   border-color: #00B3B3;
+  color: #FFFFFF;
 }
 .btn-primary:focus {
-  background-color: #00B3B3;
-  border-color: #00B3B3;
   box-shadow: 0 0 0 0.25rem rgba(55, 200, 200, 0.5);
+}
+
+.spinner-border {
+  color: #008080;
 }
 
 .validation-summary-errors {
@@ -49,6 +52,7 @@ footer {
 }
 
 main {
+  position: relative;
   flex-grow: 1;
 }
 

@@ -5,16 +5,19 @@
     border-color: $primary-background-color;
     color: $primary-background-color-text;
 
-    &:hover {
+    &:hover, &:focus, &:disabled {
         background-color: $secondary-background-color;
         border-color: $secondary-background-color;
+        color: $primary-background-color-text;
     }
 
     &:focus {
-        background-color: $secondary-background-color;
-        border-color: $secondary-background-color;
         box-shadow: 0 0 0 0.25rem rgb(55 200 200 / 50%);
     }
+}
+
+.spinner-border {
+    color: $primary-background-color;
 }
 
 .validation-summary-errors {

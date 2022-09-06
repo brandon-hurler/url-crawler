@@ -6,5 +6,9 @@
   {
     "outputFile": "wwwroot/js/url-form.es5.js",
     "inputFile": "wwwroot/js/url-form.js"
+  },
+  {
+    "outputFile": "wwwroot/js/loading-button.es5.js",
+    "inputFile": "wwwroot/js/loading-button.js"
   }
 ]
