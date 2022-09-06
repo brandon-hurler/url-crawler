@@ -26,7 +26,7 @@ namespace URL_Crawler.Models.Adapters
         {
             var textList = new List<string>();
 
-            foreach (var node in _htmlDocument.DocumentNode.SelectSingleNode("//body").DescendantsAndSelf())
+            foreach (var node in _htmlDocument.DocumentNode.SelectNodes("//text()[normalize-space()]"))
             {
                 if (node.NodeType == HtmlNodeType.Text && node.ParentNode.Name != "script" && node.ParentNode.Name != "style")
                 {
