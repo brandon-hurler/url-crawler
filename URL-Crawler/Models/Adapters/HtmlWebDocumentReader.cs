@@ -14,7 +14,7 @@ namespace URL_Crawler.Models.Adapters
 
         public IDocument Read(string url)
         {
-            return new HtmlWebDocument(_webClient.Load(url));
+            return new HtmlWebDocument(_webClient.Load(url), url);
         }
     }
 }
