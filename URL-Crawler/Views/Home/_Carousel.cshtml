@@ -1,34 +1,36 @@
 ﻿@model URL_Crawler.Models.ViewModels.ContentViewModel
 
-<!-- Start Carousel Wrapper -->
-<div id="image-carousel" class="carousel slide carousel-fade mt-5" data-bs-ride="carousel">
-    <!-- Indicators -->
-    <div class="carousel-indicators">
-        @for(int i = 0; i < Model.Images.Count; i++) {
-            <button type="button" data-bs-target="#image-carousel" data-bs-slide-to="@i" aria-label="Slide @i" @(i == 0 ? "class=active aria-current=true" : null)></button>
-        }
-    </div>
+@if(Model?.Images != null && Model.Images.Count > 0) {
+    <!-- Start Carousel Wrapper -->
+    <div id="image-carousel" class="carousel slide carousel-fade mt-5" data-bs-ride="carousel">
+        <!-- Indicators -->
+        <div class="carousel-indicators">
+            @for (int i = 0; i < Model.Images.Count; i++)
+            {
+                <button type="button" data-bs-target="#image-carousel" data-bs-slide-to="@i" aria-label="Slide @i" @(i == 0 ? "class=active aria-current=true" : null)></button>
+            }
+        </div>
 
-    <!-- Start Inner Carousel -->
-    <div class="carousel-inner">
-        @for (int i = 0; i < Model.Images.Count; i++)
-        {
-            <!-- Single item -->
-            <div class="carousel-item@(i == 0 ? " active" : null)">
-                <img src="@Model.Images[i].Source" class="d-block w-100" alt="@Model.Images[i].AltText" />
-            </div>
-        }
+        <!-- Start Inner Carousel -->
+        <div class="carousel-inner">
+            @for (int i = 0; i < Model.Images.Count; i++)
+            {
+                <!-- Single item -->
+                <div class="carousel-item@(i == 0 ? " active" : null)">
+                    <img src="@Model.Images[i].Source" class="d-block w-100" alt="@Model.Images[i].AltText" />
+                </div>
+            }
+        </div>
+        <!-- End Inner Carousel -->
+        <!-- Controls -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#image-carousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#image-carousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
     </div>
-    <!-- End Inner Carousel -->
-
-    <!-- Controls -->
-    <button class="carousel-control-prev" type="button" data-bs-target="#image-carousel" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#image-carousel" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-    </button>
-</div>
-<!-- End Carousel Wrapper -->
+    <!-- End Carousel Wrapper -->
+}
