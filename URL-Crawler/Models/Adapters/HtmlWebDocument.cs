@@ -45,8 +45,11 @@ namespace URL_Crawler.Models.Adapters
             {
                 if (node.NodeType == HtmlNodeType.Text && node.ParentNode.Name != "script" && node.ParentNode.Name != "style")
                 {
+                    // Could also use RegEx, this is a little easier to read.
+                    var pattern = new char[] { ' ', ':', ';', ',', '.', '?', '!' };
+
                     // Separate on spaces in text body before splitting out words.
-                    var splitText = node.InnerText.Split(" ", StringSplitOptions.RemoveEmptyEntries);
+                    var splitText = node.InnerText.Split(pattern, StringSplitOptions.RemoveEmptyEntries);
 
                     // Filter out any non-words in body of text and convert to lowercase (to merge entries).
                     var words = splitText.Where(f => f.All(char.IsLetter)).ToList().ConvertAll(d => d.ToLower());
