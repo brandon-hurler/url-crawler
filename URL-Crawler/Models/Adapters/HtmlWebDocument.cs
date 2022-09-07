@@ -2,6 +2,7 @@
 using URL_Crawler.Models.DataModels;
 using URL_Crawler.Models.Interfaces;
 using URL_Crawler.Extensions;
+using System.Text.RegularExpressions;
 
 namespace URL_Crawler.Models.Adapters
 {
@@ -45,11 +46,11 @@ namespace URL_Crawler.Models.Adapters
             {
                 if (node.NodeType == HtmlNodeType.Text && node.ParentNode.Name != "script" && node.ParentNode.Name != "style")
                 {
-                    // Could also use RegEx, this is a little easier to read.
-                    var pattern = new char[] { ' ', ':', ';', ',', '.', '?', '!' };
+                    // Matches one or more whitespace characters and punctuation, ignoring punctuation mid-word.
+                    var pattern = new Regex("\\s+|(?=\\W\\p{P}|\\p{P}\\W)|(?<=\\W\\p{P}|\\p{P}\\W})");
 
                     // Separate on spaces in text body before splitting out words.
-                    var splitText = node.InnerText.Split(pattern, StringSplitOptions.RemoveEmptyEntries);
+                    var splitText = pattern.Split(node.InnerText).Where(f => f != string.Empty);
 
                     // Filter out any non-words in body of text and convert to lowercase (to merge entries).
                     var words = splitText.Where(f => f.All(char.IsLetter)).ToList().ConvertAll(d => d.ToLower());
